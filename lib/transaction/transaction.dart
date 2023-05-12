@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../test_page/quizz.dart';
+
 class transaction extends StatefulWidget {
   const transaction({Key? key}) : super(key: key);
 
@@ -55,6 +57,10 @@ class _transactionState extends State<transaction> {
                       child: ElevatedButton(
                         onPressed: () {
                           //Emplacement de l'API de paiement
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => QuizzScreen()),
+                          );
                         },
                         child: Text('Valider'),
                         style: ElevatedButton.styleFrom(

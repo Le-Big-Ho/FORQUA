@@ -4,6 +4,8 @@ import 'package:forqua/test_page/quizz.dart';
 import 'package:responsive_framework/breakpoint.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
+import 'test_page/essaie.dart';
+
 void main() {
   runApp(const MyApp());
 }
