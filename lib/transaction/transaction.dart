@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forqua/test_page/essaie.dart';
 
 import '../test_page/quizz.dart';
 
@@ -59,7 +60,7 @@ class _transactionState extends State<transaction> {
                           //Emplacement de l'API de paiement
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => QuizzScreen()),
+                            MaterialPageRoute(builder: (context) => TestOne()),
                           );
                         },
                         child: Text('Valider'),

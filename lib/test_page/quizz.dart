@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Accueil/accueil.dart';
 
@@ -28,9 +29,13 @@ class _QuizzScreenState extends State<QuizzScreen> {
   int _questionIndex = 0;
   late Timer _timer;
   int _countdown = 30;
+  int initialCountdownValue =30;
 
   void _startCountdown() {
     const oneSec = Duration(seconds: 1);
+    if (_timer != null) {
+      _timer.cancel();
+    }
     _timer = Timer.periodic(
       oneSec,
           (Timer timer) {
@@ -45,6 +50,15 @@ class _QuizzScreenState extends State<QuizzScreen> {
         });
       },
     );
+  }
+
+  void _resetCountdown() {
+    if (_timer != null) {
+      _timer.cancel();
+    }
+    setState(() {
+      _countdown = initialCountdownValue;
+    });
   }
 
   final List<Question> _questions = [
@@ -83,15 +97,20 @@ class _QuizzScreenState extends State<QuizzScreen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Results'),
+        title: Text('Résultat', style: GoogleFonts.montserrat(
+          fontSize: 20,
+          fontWeight: FontWeight.w800,
+          color: Colors.amber
+        ),),
         content: Text(
             'vous avez $_correctAnswers repondu a ${_questions.length} questions correctement.'),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              _resetCountdown();
+              // Navigator.of(context).pop();
             },
-            child: Text('Close'),
+            child: Text('Fermer'),
           )
         ],
       ),
@@ -102,8 +121,8 @@ class _QuizzScreenState extends State<QuizzScreen> {
   void initState() {
     super.initState();
     _startCountdown();
+    initialCountdownValue = _countdown; // Définir initialCountdownValue à la valeur initiale de la minuterie
   }
-
   @override
   void dispose() {
     _timer.cancel();
@@ -113,15 +132,15 @@ class _QuizzScreenState extends State<QuizzScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Quizz'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Quizz'),
+      // ),
       body: Center(
         child: Container(
           height: 300,
           width: 300,
           decoration: BoxDecoration(
-              color: Colors.redAccent,
+              color: Colors.lightBlue,
               borderRadius: BorderRadius.circular(20)
           ),
           child: Column(
@@ -131,19 +150,25 @@ class _QuizzScreenState extends State<QuizzScreen> {
               Container(
                 decoration: const BoxDecoration(
                   color: Colors.redAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
-                child: Text(
-                  '$_countdown',
-                  style: const TextStyle(fontSize: 16),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '$_countdown',
+                    style: const TextStyle(fontSize: 14),
+                  ),
                 ),
               ),
               SizedBox(height: 20,),
-              Text(
-                _questionIndex < _questions.length
-                    ? _questions[_questionIndex].questionText
-                    : 'End of quiz!',
-                style: TextStyle(fontSize: 24),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  _questionIndex < _questions.length
+                      ? _questions[_questionIndex].questionText
+                      : 'End of quiz!',
+                  style: TextStyle(fontSize: 24),
+                ),
               ),
               SizedBox(height: 20),
               ..._questions[_questionIndex].answerOptions

@@ -44,13 +44,16 @@ class _HomeState extends State<Home> {
             Center(
               child: Column(
                 children: [
-                  Text(
-                      "Pour répondre aux questions une souscription de 200f cfa "
-                      "vous sera facturé à votre compte airtel money,",
-                      style: GoogleFonts.montserrat(
-                          fontSize: 20,
-                          color: const Color.fromARGB(255, 0, 0, 0),
-                          fontWeight: FontWeight.bold)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Text(
+                        "Pour répondre aux questions une souscription de 200f cfa "
+                        "vous sera facturé à votre compte airtel money,",
+                        style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.bold)),
+                  ),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
