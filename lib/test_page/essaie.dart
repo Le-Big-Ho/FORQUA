@@ -38,8 +38,7 @@ class _TestOneState extends State<TestOne> {
           (Timer timer) {
         setState(() {
           if (_countdown < 1) {
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Home()),);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => Home()), (Route<dynamic> route) => false);
             timer.cancel();
           } else {
             _countdown = _countdown - 1;
@@ -92,7 +91,7 @@ class _TestOneState extends State<TestOne> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => Home()), (Route<dynamic> route) => false);
             },
             child: Text('Fermer'),
           )

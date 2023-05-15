@@ -53,6 +53,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
   }
 
   void _resetCountdown() {
+    print("Temps stoppé avec succès!");
     if (_timer != null) {
       _timer.cancel();
     }
@@ -108,7 +109,8 @@ class _QuizzScreenState extends State<QuizzScreen> {
           TextButton(
             onPressed: () {
               _resetCountdown();
-              // Navigator.of(context).pop();
+              print("Temps stoppé avec succès!");
+              Navigator.of(context).pop();
             },
             child: Text('Fermer'),
           )
